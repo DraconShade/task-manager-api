@@ -1,0 +1,55 @@
+services:
+  db:
+    image: mariadb:11
+    # container_name: mariadb
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:${DB_PORT}:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  nodejs:
+    image: node:20
+    # container_name: nodejs
+    working_dir: /app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "0.0.0.0:${API_PORT}:3000"
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+    environment:
+      NODE_ENV: development
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    # container_name: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "0.0.0.0:${PMA_PORT}:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
+    networks:
+      - app-network
+
+volumes:
+  node_modules:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
