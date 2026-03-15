@@ -6,9 +6,11 @@ app.use(express.json());
 const mainRouter = require("./routes/main.routes.js");
 const healthRouter = require("./routes/health.routes.js");
 const authRouter = require("./routes/auth.routes.js");
+const taskRouter = require("./routes/task.routes.js");
 
 app.use(mainRouter);
 app.use(healthRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/tasks", taskRouter);
 
 module.exports = app;

@@ -7,8 +7,4 @@ const authMiddleware = require("../middlewares/auth.middleware");
 router.post("/register", authController.registerUser);
 router.post("/login", authController.loginUser);
 
-router.get("/profile", authMiddleware, (req, res) => {
-  res.json({ message: "This is a protected route" });
-});
-
 module.exports = router;
