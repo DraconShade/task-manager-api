@@ -10,7 +10,7 @@ const taskRouter = require("./routes/task.routes.js");
 
 app.use(mainRouter);
 app.use(healthRouter);
-app.use("/api/auth", authRouter);
-app.use("/api/tasks", taskRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/tasks", taskRouter);
 
 module.exports = app;

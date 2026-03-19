@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
       user: newUser,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(409).json({ error: error.message });
   }
 };
 
@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(401).json({ error: error.message });
   }
 };
 
