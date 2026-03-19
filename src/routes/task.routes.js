@@ -14,13 +14,6 @@ router.use(authMiddleware);
 
 /**
  * @swagger
- * tags:
- *   name: Tasks
- *   description: Task management endpoints
- */
-
-/**
- * @swagger
  * /api/v1/tasks:
  *   post:
  *     summary: Create a new task
@@ -36,8 +29,16 @@ router.use(authMiddleware);
  *     responses:
  *       201:
  *         description: Task created successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Task created successfully
+ *               data:
+ *                 task:
+ *                   id: 1
  *       400:
- *         description: Validation error or bad request
+ *         description: Validation error or invalid request
  *         content:
  *           application/json:
  *             schema:
@@ -45,7 +46,11 @@ router.use(authMiddleware);
  *                 - $ref: '#/components/schemas/ValidationError'
  *                 - $ref: '#/components/schemas/ErrorResponse'
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post("/", createTaskValidation, validate, taskController.createTask);
 
@@ -60,8 +65,26 @@ router.post("/", createTaskValidation, validate, taskController.createTask);
  *     responses:
  *       200:
  *         description: Tasks retrieved successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Tasks retrieved successfully
+ *               data:
+ *                 tasks:
+ *                   - id: 1
+ *                     user_id: 1
+ *                     title: Finish Swagger documentation
+ *                     description: Add documentation to all endpoints
+ *                     status: pending
+ *                     created_at: 2026-03-22T10:00:00.000Z
+ *                     updated_at: 2026-03-22T10:00:00.000Z
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get("/", taskController.getTasks);
 
@@ -84,12 +107,38 @@ router.get("/", taskController.getTasks);
  *     responses:
  *       200:
  *         description: Task retrieved successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Task retrieved successfully
+ *               data:
+ *                 task:
+ *                   id: 1
+ *                   user_id: 1
+ *                   title: Finish Swagger documentation
+ *                   description: Add documentation to all endpoints
+ *                   status: pending
+ *                   created_at: 2026-03-22T10:00:00.000Z
+ *                   updated_at: 2026-03-22T10:00:00.000Z
  *       400:
  *         description: Invalid task ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ValidationError'
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
  *         description: Task not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get("/:id", taskIdValidation, validate, taskController.getTaskById);
 
@@ -118,12 +167,40 @@ router.get("/:id", taskIdValidation, validate, taskController.getTaskById);
  *     responses:
  *       200:
  *         description: Task updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Task updated successfully
+ *               data:
+ *                 task:
+ *                   id: 1
+ *                   user_id: 1
+ *                   title: Update Swagger documentation
+ *                   description: Refine examples and responses
+ *                   status: completed
+ *                   created_at: 2026-03-22T10:00:00.000Z
+ *                   updated_at: 2026-03-22T11:00:00.000Z
  *       400:
- *         description: Validation error or invalid ID
+ *         description: Validation error or invalid task ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/ValidationError'
+ *                 - $ref: '#/components/schemas/ErrorResponse'
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
  *         description: Task not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put(
   "/:id",
@@ -152,12 +229,31 @@ router.put(
  *     responses:
  *       200:
  *         description: Task deleted successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Task deleted successfully
+ *               data:
+ *                 deleted: true
  *       400:
  *         description: Invalid task ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ValidationError'
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized - Invalid or missing token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
  *         description: Task not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete("/:id", taskIdValidation, validate, taskController.deleteTask);
 

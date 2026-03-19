@@ -2,12 +2,14 @@ const { checkSchema } = require("express-validator");
 
 const loginValidation = checkSchema({
   email: {
+    trim: true,
     notEmpty: {
       errorMessage: "Email is required",
     },
     isEmail: {
       errorMessage: "Invalid email format",
     },
+    normalizeEmail: true,
   },
   password: {
     notEmpty: {

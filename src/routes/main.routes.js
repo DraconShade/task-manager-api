@@ -10,6 +10,10 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: API is running
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Task Manager API is running
  */
 router.get("/", (req, res) => {
   res.status(200).json({

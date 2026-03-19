@@ -8,13 +8,6 @@ const validate = require("../middlewares/validation.middleware");
 
 /**
  * @swagger
- * tags:
- *   name: Auth
- *   description: Authentication endpoints
- */
-
-/**
- * @swagger
  * /api/v1/auth/register:
  *   post:
  *     summary: Register a new user
@@ -28,16 +21,28 @@ const validate = require("../middlewares/validation.middleware");
  *     responses:
  *       201:
  *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: User registered successfully
+ *               data:
+ *                 user:
+ *                   id: 1
+ *                   name: Daivid Quintero
+ *                   email: daivid@example.com
  *       400:
- *         description: Validation error or bad request
+ *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
- *               oneOf:
- *                 - $ref: '#/components/schemas/ValidationError'
- *                 - $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/ValidationError'
  *       409:
  *         description: Email already registered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post(
   "/register",
@@ -61,16 +66,29 @@ router.post(
  *     responses:
  *       200:
  *         description: Login successful
+ *         content:
+ *           application/json:
+ *             example:
+ *               success: true
+ *               message: Login successful
+ *               data:
+ *                 token: your_jwt_token_here
+ *                 user:
+ *                   id: 1
+ *                   name: Daivid Quintero
+ *                   email: daivid@example.com
  *       400:
  *         description: Validation error
  *         content:
  *           application/json:
  *             schema:
- *               oneOf:
- *                 - $ref: '#/components/schemas/ValidationError'
- *                 - $ref: '#/components/schemas/ErrorResponse'
+ *               $ref: '#/components/schemas/ValidationError'
  *       401:
  *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post("/login", loginValidation, validate, authController.loginUser);
 

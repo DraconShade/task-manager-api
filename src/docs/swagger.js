@@ -7,12 +7,26 @@ const options = {
       title: "Task Manager API",
       version: "1.0.0",
       description:
-        "REST API for user authentication and task management with JWT.",
+        "REST API for user authentication and task management using JWT, Express, MySQL and Docker.",
     },
     servers: [
       {
-        url: "http://localhost:8081",
+        url: "http://localhost:3000",
         description: "Local server",
+      },
+    ],
+    tags: [
+      {
+        name: "System",
+        description: "System endpoints",
+      },
+      {
+        name: "Auth",
+        description: "Authentication endpoints",
+      },
+      {
+        name: "Tasks",
+        description: "Task management endpoints",
       },
     ],
     components: {
@@ -21,6 +35,7 @@ const options = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
+          description: "Paste your JWT token here",
         },
       },
       schemas: {
@@ -64,11 +79,11 @@ const options = {
           properties: {
             title: {
               type: "string",
-              example: "Finish API documentation",
+              example: "Finish Swagger documentation",
             },
             description: {
               type: "string",
-              example: "Add Swagger docs to all endpoints",
+              example: "Add documentation to all endpoints",
             },
             status: {
               type: "string",
@@ -82,11 +97,11 @@ const options = {
           properties: {
             title: {
               type: "string",
-              example: "Update task title",
+              example: "Update Swagger documentation",
             },
             description: {
               type: "string",
-              example: "Updated description",
+              example: "Refine examples and responses",
             },
             status: {
               type: "string",
@@ -126,12 +141,12 @@ const options = {
             },
             title: {
               type: "string",
-              example: "Finish API documentation",
+              example: "Finish Swagger documentation",
             },
             description: {
               type: "string",
               nullable: true,
-              example: "Add Swagger docs to all endpoints",
+              example: "Add documentation to all endpoints",
             },
             status: {
               type: "string",
@@ -141,12 +156,41 @@ const options = {
             created_at: {
               type: "string",
               format: "date-time",
-              example: "2026-03-21T10:00:00.000Z",
+              example: "2026-03-22T10:00:00.000Z",
             },
             updated_at: {
               type: "string",
               format: "date-time",
-              example: "2026-03-21T10:30:00.000Z",
+              example: "2026-03-22T10:00:00.000Z",
+            },
+          },
+        },
+        SuccessResponse: {
+          type: "object",
+          properties: {
+            success: {
+              type: "boolean",
+              example: true,
+            },
+            message: {
+              type: "string",
+              example: "Operation successful",
+            },
+            data: {
+              type: "object",
+            },
+          },
+        },
+        ErrorResponse: {
+          type: "object",
+          properties: {
+            success: {
+              type: "boolean",
+              example: false,
+            },
+            message: {
+              type: "string",
+              example: "Task not found",
             },
           },
         },
@@ -166,6 +210,14 @@ const options = {
               items: {
                 type: "object",
                 properties: {
+                  type: {
+                    type: "string",
+                    example: "field",
+                  },
+                  value: {
+                    type: "string",
+                    example: "",
+                  },
                   msg: {
                     type: "string",
                     example: "Email is required",
@@ -180,19 +232,6 @@ const options = {
                   },
                 },
               },
-            },
-          },
-        },
-        ErrorResponse: {
-          type: "object",
-          properties: {
-            success: {
-              type: "boolean",
-              example: false,
-            },
-            message: {
-              type: "string",
-              example: "Task not found",
             },
           },
         },

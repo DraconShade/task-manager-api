@@ -2,17 +2,20 @@ const { checkSchema } = require("express-validator");
 
 const registerValidation = checkSchema({
   name: {
+    trim: true,
     notEmpty: {
       errorMessage: "Name is required",
     },
   },
   email: {
+    trim: true,
     notEmpty: {
       errorMessage: "Email is required",
     },
     isEmail: {
       errorMessage: "Invalid email format",
     },
+    normalizeEmail: true,
   },
   password: {
     notEmpty: {
