@@ -42,17 +42,21 @@ API REST para la gestión de tareas con autenticación de usuarios. Desarrollada
 
 ## 🏗️ Estructura del proyecto
 
+```
+
 src/
 │
-├── config/ # Configuración de base de datos
-├── controllers/ # Controladores (manejo de requests)
-├── middlewares/ # Middlewares (auth, validaciones)
-├── models/ # Acceso a datos (queries)
-├── routes/ # Rutas de la API
-├── services/ # Lógica de negocio
-├── validations/ # Validaciones de entrada
-├── utils/ # Helpers (respuestas, etc.)
-└── docs/ # Configuración de Swagger
+├── config/         # Configuración de base de datos
+├── controllers/    # Controladores (manejo de requests)
+├── middlewares/    # Middlewares (auth, validaciones)
+├── models/         # Acceso a datos (queries)
+├── routes/         # Rutas de la API
+├── services/       # Lógica de negocio
+├── validations/    # Validaciones de entrada
+├── utils/          # Helpers (respuestas, etc.)
+└── docs/           # Configuración de Swagger
+
+```
 
 ---
 
@@ -78,6 +82,8 @@ docker compose up --build / docker compose up -d
 docker-compose up --build
 
 http://localhost:8081/api-docs
+
+```
 
 # Autor
 
