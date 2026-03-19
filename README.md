@@ -1,79 +1,95 @@
-![Node.js](https://img.shields.io/badge/Node.js-18+-green)
-![Express](https://img.shields.io/badge/Express.js-Backend-black)
-![MariaDB](https://img.shields.io/badge/MariaDB-Database-blue)
-![Docker](https://img.shields.io/badge/Docker-Container-blue)
-![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
+# 🧠 Task Manager API
+
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-Backend-000000?logo=express&logoColor=white)
+![MariaDB](https://img.shields.io/badge/MariaDB-Database-003545?logo=mariadb&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Authentication-000000?logo=jsonwebtokens&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-API--Docs-85EA2D?logo=swagger&logoColor=black)
+![Validation](https://img.shields.io/badge/Validation-express--validator-yellow)
+![REST API](https://img.shields.io/badge/API-REST-02569B)
+![Architecture](https://img.shields.io/badge/Architecture-Layered-6f42c1)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-# Task Manager API
-
-API REST para la gestión de tareas desarrollada con **Node.js**, **Express** y **MariaDB**.
-
-Este proyecto forma parte de mi portafolio como desarrollador backend y demuestra la implementación de autenticación con JWT y un CRUD completo de tareas.
+API REST para la gestión de tareas con autenticación de usuarios. Desarrollada con Node.js, Express, MySQL, JWT y Docker, siguiendo una arquitectura modular y escalable.
 
 ---
 
-# Tecnologías utilizadas
+## 🚀 Características
+
+- 🔐 Autenticación con JWT (Registro / Login)
+- 📋 CRUD completo de tareas
+- 👤 Aislamiento de tareas por usuario
+- 🧱 Arquitectura modular (routes → controllers → services → models)
+- 🐳 Entorno contenerizado con Docker
+- ✅ Validación de peticiones con express-validator
+- 📚 Documentación interactiva con Swagger (OpenAPI)
+
+---
+
+## 🛠️ Tecnologías utilizadas
 
 - Node.js
-- Express
-- MariaDB
+- Express.js
+- MySQL
 - Docker
-- JWT (Json Web Token)
+- JWT (jsonwebtoken)
 - bcrypt
-- dotenv
+- express-validator
+- Swagger (OpenAPI)
 
 ---
 
-# Características
+## 🏗️ Estructura del proyecto
 
-- Registro de usuarios
-- Login con autenticación JWT
-- Middleware para proteger rutas
-- CRUD completo de tareas
-- Arquitectura por capas
-- Base de datos relacional
-
----
-
-# Estructura del proyecto
 src/
-├── config
-├── controllers
-├── middlewares
-├── models
-├── routes
-├── services
-├── app.js
-└── server.js
-
-Cada capa tiene una responsabilidad específica:
-
-- **routes** → define los endpoints
-- **controllers** → maneja las peticiones HTTP
-- **services** → contiene la lógica de negocio
-- **models** → acceso a la base de datos
+│
+├── config/ # Configuración de base de datos
+├── controllers/ # Controladores (manejo de requests)
+├── middlewares/ # Middlewares (auth, validaciones)
+├── models/ # Acceso a datos (queries)
+├── routes/ # Rutas de la API
+├── services/ # Lógica de negocio
+├── validations/ # Validaciones de entrada
+├── utils/ # Helpers (respuestas, etc.)
+└── docs/ # Configuración de Swagger
 
 ---
 
-# Autenticación
+## ⚙️ Instalación
 
-El sistema utiliza **JWT (Json Web Token)** para proteger las rutas de la API.
+### 1. Clonar repositorio
 
-Flujo básico:
+```bash
+git clone https://github.com/DraconShade/task-manager-api.git
+cd task-manager-api
 
-1. El usuario se registra
-2. El usuario inicia sesión
-3. El servidor genera un token JWT
-4. El cliente envía el token en cada petición protegida
+npm install
+
+PORT=8081
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=tu_password
+DB_NAME=task_manager
+JWT_SECRET=tu_clave_secreta
+
+docker compose up --build / docker compose up -d
+
+docker-compose up --build
+
+http://localhost:8081/api-docs
 
 # Autor
 
-Daivid Quintero  
+Daivid Quintero (DraconShade)  
 Ingeniero Informático
+
+Web  
+https://daividquintero.kesug.com
+
+Linkedin
+https://www.linkedin.com/in/draconshade/
 
 GitHub  
 https://github.com/DraconShade
 
-Web  
-https://daividquintero.kesug.com
